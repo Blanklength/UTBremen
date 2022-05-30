@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -34,9 +34,9 @@ class Device_Type(models.Model):
 
 
 class Device(models.Model):
-    device_production_date = models.DateField(default=datetime.date.today())
+    device_production_date = models.DateField(default=now())
     device_serial_number = models.CharField(max_length=50, default=None)
-    device_warantee_date = models.DateField(default=datetime.date.today())
+    device_warranty_date = models.DateField(default=now())
     device_is_working = models.BooleanField(default=True)
     device_special_notes = models.CharField(max_length=50, default=None, blank=True)
     device_typ = models.ForeignKey(Device_Type, on_delete=models.DO_NOTHING, default=1)
@@ -122,3 +122,7 @@ class Room(models.Model):
 
     def __str__(self):
         return f'{self.room_name} {self.building_nr} {self.floor_nr}'
+
+
+class TestModel(Device):
+    pass
