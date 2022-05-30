@@ -1,0 +1,12 @@
+
+#b_title{
+    font-size: xxx-large;
+    text-align: center;
+}
+
+.banner{
+    align-content: center;
+    background-color: blue;
+    display: flex;
+    height: 120px
+}
