@@ -4,13 +4,6 @@ from django.utils.timezone import now
 
 # Create your models here.
 
-
-# user
-class User(models.Model):
-    username = models.CharField(max_length=10, default=None)
-    user_password = models.CharField(max_length=10, default=None)
-
-
 # choices
 building_number_choices = [
     ("BA1", "BA1"),
@@ -30,6 +23,11 @@ floor = [
     ("1F", "First Floor"),
     ("2F", "Second Floor")
 ]
+
+# user
+class User(models.Model):
+    username = models.CharField(max_length=10, default=None)
+    user_password = models.CharField(max_length=10, default=None)
 
 
 class Device_Type(models.Model):

@@ -1,4 +1,7 @@
 from django import forms
+from .models import building_number_choices
+from .models import floor
+
 """"
 device_choices = (
     ("Pj", "Projector"),
@@ -17,15 +20,15 @@ class FilterForm(forms.Form):
     device_field = forms.CharField(choices=device_choices)
 
 
-class CreateRoomForm(forms.Form):
-    # room number can be 1 or 2
-    building_nr = forms.CharField(max_length=10, choices=building_number_choices, default=1)
-    # basement, ground floor, 1 floor, 2 floor
-    floor_nr = forms.CharField(max_length=10, choices=floor, default="basement")
-    room_name = forms.CharField(max_length=10)
-
-
 class DeviceList(forms.Form):
     # devices
     pass
 """
+
+
+class CreateRoomForm(forms.Form):
+    # room number can be 1 or 2
+    building_nr = forms.ChoiceField(choices=building_number_choices)
+    # basement, ground floor, 1 floor, 2 floor
+    floor_nr = forms.ChoiceField(choices=floor)
+    room_name = forms.CharField(max_length=10)

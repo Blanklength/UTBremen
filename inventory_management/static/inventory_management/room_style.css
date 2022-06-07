@@ -38,4 +38,8 @@ table, th, tr, td{
     padding: 10px;
 }
 
+.Line{
+    display: flex;
+    justify-content: space-between;
 
+}

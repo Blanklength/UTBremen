@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from .models import Room
 from django.views.generic import ListView
+from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.db.models import Q
+from .forms import CreateRoomForm
 
 
 # from .forms import FilterForm
@@ -32,12 +35,28 @@ class RoomDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = str(self.request)[-3]
-        context['room_num']=pk
+        room = Room.objects.get(pk=int(pk))
+        context['room_num'] = room.room_name
         print(self.request)
 
         return context
 
 
 
-def TestDetail(request, id):
-    return HttpResponse(id)
+class CreateRoomView(CreateView):
+    model = Room
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        form1 = CreateRoomForm()
+        return {'form': form1}
+
+    def get_success_url(self):
+        return '/'
+
+
+def delete(request, id):
+    room = Room.objects.get(id=id)
+    room.delete()
+
+    return HttpResponseRedirect("/")

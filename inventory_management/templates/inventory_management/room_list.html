@@ -45,7 +45,12 @@ Rooms
         <div class="room_list">
              <div class="list-group">
                  {% for room in object_list %}
+                     <div class="Line">
+
                      <a href="{{ room.id }}" class="list-group-item list-group-item-action" style="text-align: center">{{ room.room_name }} {{ room.floor_nr }} {{ room.building_nr }}</a>
+                     <a href="delete/{{ room.id }}">Delete</a>
+                     </div>
+
                  {% endfor %}
             </div>
 
