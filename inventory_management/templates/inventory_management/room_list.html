@@ -13,7 +13,7 @@ Rooms
 {% block content %}
     <!-- Das Content Div beinhaltet die Suchleitste + Filter und Raumliste -->
     <div class="content_div">
-        <div class="search_div">
+        <div class="d-flex justify-content-center">
             <form action="{% url 'search_results' %}" method="get">
                 <label for="search_input"></label>
                 <input type="text" id="search_input" name="search" placeholder="search...">
@@ -32,7 +32,7 @@ Rooms
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>HAYIR IN SHA ALLAH</p>
+                            {{filter_fields}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
@@ -43,15 +43,11 @@ Rooms
             </div>
         </div>
         <div class="room_list">
-             <table>
+             <div class="list-group">
                  {% for room in object_list %}
-                     <tr>
-                         <td>{{ room.room_name }}</td>
-                         <td>{{ room.building_nr }}</td>
-                         <td>{{ room.floor_nr }}</td>
-                     </tr>
+                     <a href="{{ room.id }}" class="list-group-item list-group-item-action" style="text-align: center">{{ room.room_name }} {{ room.floor_nr }} {{ room.building_nr }}</a>
                  {% endfor %}
-            </table>
+            </div>
 
         </div>
     </div>

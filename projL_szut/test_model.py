@@ -2,6 +2,7 @@ import sys
 import os
 import django
 from django.utils import timezone
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "projL_szut.settings")
 django.setup()
 

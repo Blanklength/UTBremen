@@ -1,7 +1,15 @@
 from django.db import models
 from django.utils.timezone import now
 
+
 # Create your models here.
+
+
+# user
+class User(models.Model):
+    username = models.CharField(max_length=10, default=None)
+    user_password = models.CharField(max_length=10, default=None)
+
 
 # choices
 building_number_choices = [
@@ -26,11 +34,11 @@ floor = [
 
 class Device_Type(models.Model):
     device_brand = models.CharField(max_length=50, default=None)
-    device_serie = models.CharField(max_length=50, default=None)
-    device_serie_num = models.IntegerField(max_length=10, default=None)
+    device_series = models.CharField(max_length=50, default=None)
+    device_series_num = models.IntegerField(max_length=10, default=None)
 
     def __str__(self):
-        return f'{self.device_brand} {self.device_serie} {self.device_serie_num}'
+        return f'{self.device_brand} {self.device_series} {self.device_series_num}'
 
 
 class Device(models.Model):
@@ -50,11 +58,15 @@ class Device(models.Model):
 #################################################################
 
 class Projector_Brand_Typ(Device_Type):
-    pass
+    class Meta:
+        verbose_name = "Projektor Typ"
+        verbose_name_plural = "Projektor Typen"
 
 
 class Projector(Device):
-    pass
+    class Meta:
+        verbose_name = "Projektor"
+        verbose_name_plural = "Projektoren"
 
 
 #################################################################
@@ -62,6 +74,10 @@ class Projector(Device):
 #################################################################
 
 class Canvas(models.Model):
+    class Meta:
+        verbose_name = "Tafel"
+        verbose_name_plural = "Tafeln"
+
     plate_amounts = models.CharField(max_length=10, choices=plate_amount_choices, default=1)
 
     def __str__(self):
@@ -73,11 +89,15 @@ class Canvas(models.Model):
 #################################################################
 
 class Speaker_typ(Device_Type):
-    pass
+    class Meta:
+        verbose_name = "Lautsprecher Typ"
+        verbose_name_plural = "Lautsprecher Typen"
 
 
 class Speaker(Device):
-    pass
+    class Meta:
+        verbose_name = "Lautsprecher"
+        verbose_name_plural = "Lautsprecher"
 
 
 #################################################################
@@ -85,11 +105,15 @@ class Speaker(Device):
 #################################################################
 
 class SmartBoard_typ(Device_Type):
-    pass
+    class Meta:
+        verbose_name = "Smartboard Type"
+        verbose_name_plural = "Smartboard Typen"
 
 
 class SmartBoard(Device):
-    pass
+    class Meta:
+        verbose_name = "Smartboard"
+        verbose_name_plural = "Smartboards"
 
 
 #################################################################
@@ -98,11 +122,15 @@ class SmartBoard(Device):
 
 
 class Camera_typ(Device_Type):
-    pass
+    class Meta:
+        verbose_name = "Kamera Type"
+        verbose_name_plural = "Kamera Typen"
 
 
 class Camera(Device):
-    pass
+    class Meta:
+        verbose_name = "Kamera"
+        verbose_name_plural = "Kameras"
 
 
 #################################################################
@@ -116,13 +144,9 @@ class Room(models.Model):
     floor_nr = models.CharField(max_length=10, choices=floor, default="basement")
     room_name = models.CharField(max_length=10)
     projector = models.OneToOneField(Projector, on_delete=models.SET_NULL, blank=True, default=None, null=True)
-    smartboard = models.OneToOneField(SmartBoard, on_delete=models.SET_NULL, blank=True, default=None, null=True)
+    smart_board = models.OneToOneField(SmartBoard, on_delete=models.SET_NULL, blank=True, default=None, null=True)
     speaker = models.OneToOneField(Speaker, on_delete=models.SET_NULL, blank=True, default=None, null=True)
-    canva = models.OneToOneField(Canvas, on_delete=models.SET_NULL, blank=True, default=None, null=True)
+    canvas = models.OneToOneField(Canvas, on_delete=models.SET_NULL, blank=True, default=None, null=True)
 
     def __str__(self):
         return f'{self.room_name} {self.building_nr} {self.floor_nr}'
-
-
-class TestModel(Device):
-    pass
